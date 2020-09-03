@@ -1,4 +1,10 @@
 <products>
-    <product id="1234" />
-<product id="5678" />
+    <product id="9999">
+        <a>1234</a>
+        <b>1234</b>
+    </product>
+<product id="5678">
+        <a>1234</a>
+        <b>1234</b>
+    </product>
 </products>
