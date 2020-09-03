@@ -9,13 +9,7 @@ def get_index(given_list, element):
 
 def run():
     xml_data = None
-    files = []
-    index = get_index(sys.argv, '>')
-    if index:
-        files =  sys.argv[1:index]
-    else:
-        files = sys.argv[1:]
-    
+    files = sys.argv[1:]
     for filename in files:
         data = ElementTree.parse(filename).getroot()
         if xml_data is None:
