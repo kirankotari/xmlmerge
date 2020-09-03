@@ -1,11 +1,6 @@
 import sys
 from xml.etree import ElementTree
 
-def get_index(given_list, element):
-    try:
-        return given_list.index(element)
-    except ValueError:
-        return None
 
 def run():
     xml_data = None
