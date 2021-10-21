@@ -15,7 +15,7 @@ def merge(files):
         return ElementTree.tostring(xml_data).decode('utf-8')
 
 
-def csv(xml_data):
+def csv(xml_data, new_file):
     root = ElementTree.XML(xml_data)
     data, cols = [], []
     for child in root:
@@ -24,11 +24,12 @@ def csv(xml_data):
 
     df = pd.DataFrame(data).T
     df.columns = cols
-    print(df)
+    df.to_csv(new_file, index=False)
 
 
 def help():
-    print("Usage xmlmerge  [-csv] <xml-files> > <new-file>")
+    print("Usage xmlmerge  <xml-files> > <new-file>")
+    print("Usage xmlmerge  -csv <csv-file> <xml-files>")
     print("                -h | --help")
     exit(-1)
 
@@ -52,12 +53,16 @@ def run():
             help()
 
     files = []
+    csv_name = None
     for i in sys.argv[1:]:
         files.append(i) if '.xml' in i else None
+        csv_name = i if '.csv' in i else None
 
     for each in _csv:
         if get_index(sys.argv, each):
-            print(csv(merge(files)))
+            if csv_name is None:
+                csv_name = "xml_to_csv.csv"
+            csv(merge(files), csv_name)
             return
 
     print(merge(files))
