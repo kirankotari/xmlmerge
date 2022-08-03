@@ -2,6 +2,8 @@ import sys
 import pandas as pd
 from xml.etree import ElementTree
 
+from pyrsistent import get_in
+
 
 def merge(files):
     xml_data = None
@@ -31,8 +33,9 @@ def help():
     print("Usage xmlmerge  <xml-files> > <new-file>")
     print("Usage xmlmerge  -csv <csv-file> <xml-files>")
     print("                -h | --help")
-    exit(-1)
 
+def version():
+    print("xmlmerge version: 1.0.1")
 
 def get_index(given_list, element):
     try:
@@ -47,10 +50,17 @@ def run():
 
     _help = ['-h', '--help']
     _csv = ['-csv']
+    _version = ['-v', '--version']
     
     for each in _help:
         if get_index(sys.argv, each):
             help()
+            return
+
+    for each in _version:
+        if get_index(sys.argv, each):
+            version()
+            return
 
     files = []
     csv_name = None
