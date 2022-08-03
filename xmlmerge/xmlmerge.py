@@ -35,7 +35,7 @@ def help():
     print("                -h | --help")
 
 def version():
-    print("xmlmerge version: 1.0.1")
+    print("xmlmerge version: 1.1.1")
 
 def get_index(given_list, element):
     try:
