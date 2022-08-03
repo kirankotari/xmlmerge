@@ -65,6 +65,13 @@ def run():
             csv(merge(files), csv_name)
             return
 
+    if len(files) == 0:
+        print("no xml files found")
+        print("you can test with either ls/dir <your-input>")
+        return
+
+    print("xml files planning to merge are: ")
+    print(files)
     print(merge(files))
 
 
