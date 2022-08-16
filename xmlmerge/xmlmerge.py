@@ -35,7 +35,7 @@ def help():
     print("                -h | --help")
 
 def version():
-    print("xmlmerge version: 1.1.1")
+    print("xmlmerge version: 1.1.2")
 
 def get_index(given_list, element):
     try:
@@ -45,8 +45,6 @@ def get_index(given_list, element):
 
 
 def run():
-    if len(sys.argv) <= 2:
-        help()
 
     _help = ['-h', '--help']
     _csv = ['-csv']
@@ -61,6 +59,10 @@ def run():
         if get_index(sys.argv, each):
             version()
             return
+
+    if len(sys.argv) <= 2:
+        help()
+        return
 
     files = []
     csv_name = None
@@ -80,8 +82,8 @@ def run():
         print("you can test with either ls/dir <your-input>")
         return
 
-    print("xml files planning to merge are: ")
-    print(files)
+    # print("xml files planning to merge are: ")
+    # print(files)
     print(merge(files))
 
 
