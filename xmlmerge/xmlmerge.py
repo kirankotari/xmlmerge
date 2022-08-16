@@ -5,30 +5,6 @@ from xml.etree import ElementTree
 from pyrsistent import get_in
 
 
-def merge(files):
-    xml_data = None
-    for filename in files:
-        data = ElementTree.parse(filename).getroot()
-        if xml_data is None:
-            xml_data = data
-        else:
-            xml_data.extend(data)
-    if xml_data is not None:
-        return ElementTree.tostring(xml_data).decode('utf-8')
-
-
-def csv(xml_data, new_file):
-    root = ElementTree.XML(xml_data)
-    data, cols = [], []
-    for child in root:
-        data.append([subchild.text for subchild in child])
-        cols.append(child.tag)
-
-    df = pd.DataFrame(data).T
-    df.columns = cols
-    df.to_csv(new_file, index=False)
-
-
 def help():
     print("Usage xmlmerge  <xml-files> > <new-file>")
     print("Usage xmlmerge  -csv <csv-file> <xml-files>")
