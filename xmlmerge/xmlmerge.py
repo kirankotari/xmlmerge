@@ -2,8 +2,6 @@ import sys
 import pandas as pd
 from xml.etree import ElementTree
 
-from pyrsistent import get_in
-
 
 def merge(files):
     xml_data = None
