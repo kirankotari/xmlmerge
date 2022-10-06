@@ -12,7 +12,7 @@ def merge(files):
         else:
             xml_data.extend(data)
     if xml_data is not None:
-        return ElementTree.tostring(xml_data).decode('utf-8')
+        return ElementTree.dump(xml_data)
 
 
 def csv(xml_data, new_file):
