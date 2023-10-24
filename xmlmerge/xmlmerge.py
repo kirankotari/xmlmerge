@@ -82,7 +82,7 @@ def run():
 
     # print("xml files planning to merge are: ")
     # print(files)
-    print(merge(files))
+    merge(files)
 
 
 if __name__ == '__main__':
