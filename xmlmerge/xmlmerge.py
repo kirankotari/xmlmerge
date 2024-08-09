@@ -3,28 +3,29 @@ import pandas as pd
 from xml.etree import ElementTree
 
 
-def merge(files):
-    xml_data = None
-    for filename in files:
-        data = ElementTree.parse(filename).getroot()
-        if xml_data is None:
-            xml_data = data
-        else:
-            xml_data.extend(data)
-    if xml_data is not None:
-        return ElementTree.dump(xml_data)
+# # old logic
+# def merge(files):
+#     xml_data = None
+#     for filename in files:
+#         data = ElementTree.parse(filename).getroot()
+#         if xml_data is None:
+#             xml_data = data
+#         else:
+#             xml_data.extend(data)
+#     if xml_data is not None:
+#         return ElementTree.dump(xml_data)
 
 
-def csv(xml_data, new_file):
-    root = ElementTree.XML(xml_data)
-    data, cols = [], []
-    for child in root:
-        data.append([subchild.text for subchild in child])
-        cols.append(child.tag)
+# def csv(xml_data, new_file):
+#     root = ElementTree.XML(xml_data)
+#     data, cols = [], []
+#     for child in root:
+#         data.append([subchild.text for subchild in child])
+#         cols.append(child.tag)
 
-    df = pd.DataFrame(data).T
-    df.columns = cols
-    df.to_csv(new_file, index=False)
+#     df = pd.DataFrame(data).T
+#     df.columns = cols
+#     df.to_csv(new_file, index=False)
 
 
 def help():
