@@ -2,7 +2,30 @@ import sys
 import pandas as pd
 from xml.etree import ElementTree
 
-from pyrsistent import get_in
+
+# # old logic
+# def merge(files):
+#     xml_data = None
+#     for filename in files:
+#         data = ElementTree.parse(filename).getroot()
+#         if xml_data is None:
+#             xml_data = data
+#         else:
+#             xml_data.extend(data)
+#     if xml_data is not None:
+#         return ElementTree.dump(xml_data)
+
+
+# def csv(xml_data, new_file):
+#     root = ElementTree.XML(xml_data)
+#     data, cols = [], []
+#     for child in root:
+#         data.append([subchild.text for subchild in child])
+#         cols.append(child.tag)
+
+#     df = pd.DataFrame(data).T
+#     df.columns = cols
+#     df.to_csv(new_file, index=False)
 
 
 def help():
@@ -11,7 +34,7 @@ def help():
     print("                -h | --help")
 
 def version():
-    print("xmlmerge version: 1.1.1")
+    print("xmlmerge version: 1.1.4")
 
 def get_index(given_list, element):
     try:
@@ -21,8 +44,6 @@ def get_index(given_list, element):
 
 
 def run():
-    if len(sys.argv) <= 2:
-        help()
 
     _help = ['-h', '--help']
     _csv = ['-csv']
@@ -37,6 +58,10 @@ def run():
         if get_index(sys.argv, each):
             version()
             return
+
+    if len(sys.argv) <= 2:
+        help()
+        return
 
     files = []
     csv_name = None
@@ -56,9 +81,9 @@ def run():
         print("you can test with either ls/dir <your-input>")
         return
 
-    print("xml files planning to merge are: ")
-    print(files)
-    print(merge(files))
+    # print("xml files planning to merge are: ")
+    # print(files)
+    merge(files)
 
 
 if __name__ == '__main__':
